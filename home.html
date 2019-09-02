@@ -1,0 +1,49 @@
+<html>
+<body>
+Name: &nbsp;<br><br>
+<div id="name" style="font-weight: bold;"></div>
+<br>
+<br>
+<input id="prev" type="button" value="Previous" style="display:none"></input>
+<input id="next" type="button" value="Next"></input>
+</body>
+<script src="inputFile.js"></script>
+<script>
+	//names should contain list of names.
+	var displayedList = [];
+	var pointer = 0;
+	var allNamesLength = allNames.length;
+	function initialise(){
+		var randomName = allNames[Math.floor(Math.random() * allNamesLength) ];
+		displayedList.push(randomName);
+		document.getElementById("name").innerHTML = randomName;
+	}
+	function showNext(){
+		if(pointer < displayedList.length - 1 ){
+			pointer++;
+			document.getElementById("name").innerHTML = displayedList[pointer];
+		}
+		else{
+			var randomName = allNames[Math.floor(Math.random() * allNamesLength) ];
+			displayedList.push(randomName);
+			document.getElementById("name").innerHTML = randomName;
+			pointer++;
+			document.getElementById("prev").style.display = "inline";
+		}
+	}
+	function showPrev(){
+		if( --pointer == 0){
+			document.getElementById("prev").style.display = "none";
+		}
+		document.getElementById("name").innerHTML = displayedList[pointer];
+	}
+	initialise();
+	document.getElementById("next").onclick = function(){
+		showNext();
+	}
+	document.getElementById("prev").onclick = function(){
+		showPrev();
+	}
+</script>
+</html>
+
